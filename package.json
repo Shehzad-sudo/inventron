@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@syncfusion/ej2-react-navigations": "^28.1.39",
+    "@syncfusion/ej2-react-ribbon": "^28.1.33",
+    "inventron": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.1.1",

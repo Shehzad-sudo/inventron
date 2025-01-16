@@ -1,112 +1,278 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/electron-vite.animate.svg'
-// import './App.css'
+// export default App// App.js
+import { registerLicense } from '@syncfusion/ej2-base'
+registerLicense('ORg4AjUWIQA/Gnt2XVhhQlJHfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hTH5Sd0BjXX9ecnBSQ2hY');
 
-// function App() {
-//   const [count, setCount] = useState(0)
+
+// import React, { useState } from 'react';
+// import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+// import styled from 'styled-components';
+// import { RibbonComponent, RibbonTabModel } from '@syncfusion/ej2-react-ribbon';
+
+// const App = () => {
+//   return (
+//     <Router>
+//       <MainContainer>
+//         <TopNavBar>
+//           <NavItem to="/inventory" className={({ isActive }) => (isActive ? 'active' : '')}>
+//             Inventory
+//           </NavItem>
+//           <NavItem to="/sales" className={({ isActive }) => (isActive ? 'active' : '')}>
+//             Sales
+//           </NavItem>
+//           <NavItem to="/settings" className={({ isActive }) => (isActive ? 'active' : '')}>
+//             Settings
+//           </NavItem>
+//         </TopNavBar>
+//         <ContentContainer>
+//           <Routes>
+//             <Route path="/inventory" element={<Inventory />} />
+//             <Route path="/sales" element={<Sales />} />
+//             <Route path="/settings" element={<Settings />} />
+//           </Routes>
+//         </ContentContainer>
+//       </MainContainer>
+//     </Router>
+//   );
+// };
+
+// // Inventory Component
+// const Inventory = () => {
+//   const [activeWindow, setActiveWindow] = useState('Items');
+
+//   const inventoryTabs: RibbonTabModel[] = [
+//     {
+//       header: { text: 'Manage' },
+//       groups: [
+//         {
+//           header: 'Inventory',
+//           collections: [
+//             {
+//               items: [
+//                 { text: 'Inventory Items', click: () => setActiveWindow('Items') },
+//                 { text: 'Stock', click: () => setActiveWindow('Stock') },
+//               ],
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   ];
 
 //   return (
-//     <>
-//       <div>
-//         <a href="https://electron-vite.github.io" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
+//     <TabContent>
+//       <RibbonWrapper>
+//         <RibbonComponent id="inventory-ribbon" tabs={inventoryTabs} />
+//       </RibbonWrapper>
+//       <ContentWindow>
+//         {activeWindow === 'Items' && <div>Inventory Items Window</div>}
+//         {activeWindow === 'Stock' && <div>Stock Management Window</div>}
+//       </ContentWindow>
+//     </TabContent>
+//   );
+// };
 
-// export default App
+// // Sales Component
+// const Sales = () => {
+//   const [activeWindow, setActiveWindow] = useState('Dashboard');
 
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+//   const salesTabs: RibbonTabModel[] = [
+//     {
+//       header: { text: 'Options' },
+//       groups: [
+//         {
+//           header: 'Sales',
+//           collections: [
+//             {
+//               items: [
+//                 { text: 'Sales Dashboard', click: () => setActiveWindow('Dashboard') },
+//                 { text: 'Reports', click: () => setActiveWindow('Reports') },
+//               ],
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   ];
+
+//   return (
+//     <TabContent>
+//       <RibbonWrapper>
+//         <RibbonComponent id="sales-ribbon" tabs={salesTabs} />
+//       </RibbonWrapper>
+//       <ContentWindow>
+//         {activeWindow === 'Dashboard' && <div>Sales Dashboard Window</div>}
+//         {activeWindow === 'Reports' && <div>Sales Reports Window</div>}
+//       </ContentWindow>
+//     </TabContent>
+//   );
+// };
+
+// // Settings Component
+// const Settings = () => (
+//   <ContentWindow>
+//     <PageTitle>Application Settings</PageTitle>
+//   </ContentWindow>
+// );
+
+// // Styled Components
+// const MainContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh;
+// `;
+
+// const TopNavBar = styled.nav`
+//   display: flex;
+//   background-color: #2d3e50;
+//   padding: 0;
+//   border-bottom: 2px solid #4c637a;
+// `;
+
+// const NavItem = styled(NavLink)`
+//   flex: 1;
+//   text-align: center;
+//   padding: 15px 0;
+//   color: white;
+//   text-decoration: none;
+//   font-size: 16px;
+//   transition: background-color 0.3s, border-radius 0.3s;
+
+//   &.active {
+//     background-color: #ffffff;
+//     color: #2d3e50;
+//     border-radius: 15px 15px 0 0;
+//     font-weight: bold;
+//   }
+
+//   &:hover:not(.active) {
+//     background-color: #1b2838;
+//   }
+// `;
+
+// const ContentContainer = styled.div`
+//   flex-grow: 1;
+//   display: flex;
+//   flex-direction: column;
+// `;
+
+// const TabContent = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+// `;
+
+// const RibbonWrapper = styled.div`
+//   background-color: #f0f0f0;
+//   border-bottom: 1px solid #ccc;
+//   padding: 10px;
+// `;
+
+// const ContentWindow = styled.div`
+//   flex-grow: 1;
+//   background-color: #f5f5f5;
+//   padding: 20px;
+//   border: 1px solid #ccc;
+//   margin-top: 10px;
+// `;
+
+// const PageTitle = styled.h1`
+//   font-size: 24px;
+//   color: #333;
+// `;
+
+// export default App;
+
+
+
+
+
+
+
+
+
+import WelcomeSplash from './pages/welcomeSpash.jsx';
+
+
+import { createRoot } from 'react-dom/client';
+import * as React from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { RibbonComponent, RibbonTabsDirective, RibbonTabDirective, RibbonCollectionsDirective, RibbonCollectionDirective, RibbonGroupsDirective, RibbonGroupDirective, RibbonItemsDirective, RibbonItemDirective, RibbonColorPicker } from '@syncfusion/ej2-react-ribbon';
+import { RibbonFileMenu, RibbonGallery, RibbonItemSize, Inject } from '@syncfusion/ej2-react-ribbon';
+
+
 
 const App = () => {
-  return (
-    <Router>
-      <MainContainer>
-        <TopNavBar>
-          <NavItem to="/inventory">Inventory</NavItem>
-          <NavItem to="/sales">Sales</NavItem>
-          <NavItem to="/settings">Settings</NavItem>
-        </TopNavBar>
-        <ContentArea>
-          <Routes>
-            <Route path="/inventory" element={<Inventory />} />
-            <Route path="/sales" element={<Sales />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </ContentArea>
-      </MainContainer>
-    </Router>
-  );
+  let ribbonObj = useRef(null);
+  
+  const [contentPage, setContentPage] = useState(WelcomeSplash);
+
+    const gallerySettings = ({
+        
+        popupWidth: '544px',
+        itemCount: 3,
+        
+    });
+
+    const fileOptions = [{ text: "New", iconCss: "e-icons e-file-new", id: "new" },
+        { text: "Open", iconCss: "e-icons e-folder-open", id: "Open" },
+        { text: "Rename", iconCss: "e-icons e-rename", id: "rename" },
+        {
+            text: "Save as", iconCss: "e-icons e-save", id: "save",
+            items: [
+                { text: "Microsoft Word (.docx)", iconCss: "sf-icon-word", id: "newword" },
+                { text: "Microsoft Word 97-2003(.doc)", iconCss: "sf-icon-word", id: "oldword" },
+                { text: "Download as PDF", iconCss: "e-icons e-export-pdf", id: "pdf" }
+            ]
+        }];
+
+
+    return (<div className='control-pane'>
+                <div className='control ribbon-sample'>
+                    <div id="gallery-ribbonContainer" className='ribbon-gallery-container'>
+                        <RibbonComponent id='gallery-ribbon' cssClass='ribbonGallery' ref={ribbonObj} fileMenu={{ visible: true, menuItems: fileOptions }} >
+                            <RibbonTabsDirective>
+
+     
+                                <RibbonTabDirective header='Inventory'>
+                                    <RibbonGroupsDirective>
+
+                                        <RibbonGroupDirective header="Inventory Data" groupIconCss="e-icons e-zoom-to-fit" orientation="Row">
+                                            <RibbonCollectionsDirective>
+                                                <RibbonCollectionDirective>
+                                                    <RibbonItemsDirective>
+                                                        <RibbonItemDirective type="Button" buttonSettings={{ iconCss: "e-icons e-paste", content: "Inventory Items", clicked: () => { } }}>
+                                                        </RibbonItemDirective>
+                                                        <RibbonItemDirective type="Button" buttonSettings={{ iconCss: "e-icons e-calculate-sheet", content: "Stock Information", clicked: () => {  } }}>
+                                                        </RibbonItemDirective>
+                                                    </RibbonItemsDirective>
+                                                </RibbonCollectionDirective>
+                                            </RibbonCollectionsDirective>
+                                        </RibbonGroupDirective>
+                                        <RibbonGroupDirective header="Show" isCollapsible={true}>
+                                            <RibbonCollectionsDirective>
+                                                <RibbonCollectionDirective>
+                                                    <RibbonItemsDirective>
+                                                        <RibbonItemDirective type="CheckBox" checkBoxSettings={{ label: "Ruler", checked: false, change: () => {  } }}>
+                                                
+                                                        </RibbonItemDirective>
+                                                    </RibbonItemsDirective>
+                                                </RibbonCollectionDirective>
+                                            </RibbonCollectionsDirective>
+                                        </RibbonGroupDirective>
+                                    </RibbonGroupsDirective>
+                                </RibbonTabDirective>
+                            </RibbonTabsDirective>
+                            <Inject services={[RibbonFileMenu, RibbonColorPicker, RibbonGallery]}/>
+                        </RibbonComponent>
+
+
+                        <div id="window-page" className="window-page">
+                          {contentPage};
+                        </div>
+
+                    </div>
+                </div>
+        </div>);
 };
-
-const Inventory = () => <PageTitle>Inventory Management</PageTitle>;
-const Sales = () => <PageTitle>Sales Dashboard</PageTitle>;
-const Settings = () => <PageTitle>Application Settings</PageTitle>;
-
-// Styled Components
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Ensures it fills the viewport */
-`;
-
-const TopNavBar = styled.div`
-  display: flex;
-  background-color: #2d3e50;
-  color: white;
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-`;
-
-const NavItem = styled(NavLink)`
-  color: white;
-  text-decoration: none;
-  margin-right: 20px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 14px;
-
-  &:hover {
-    background-color: #1b2838;
-  }
-
-  &.active {
-    font-weight: bold;
-    background-color: #4c637a;
-  }
-`;
-
-const ContentArea = styled.div`
-  flex-grow: 1;
-  background-color: #ffffff;
-  padding: 20px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-`;
-
-const PageTitle = styled.h1`
-  font-size: 20px;
-  color: #333;
-`;
-
-// Export App
 export default App;
+
