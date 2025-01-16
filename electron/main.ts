@@ -36,7 +36,7 @@ function createWindow() {
     },
   })
 
-  win.removeMenu();
+  // win.removeMenu();
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {

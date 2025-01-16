@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@syncfusion/ej2-react-buttons": "^28.1.39",
+    "@syncfusion/ej2-react-calendars": "^28.1.39",
+    "@syncfusion/ej2-react-inputs": "^28.1.37",
+    "@syncfusion/ej2-react-lists": "^28.1.37",
     "@syncfusion/ej2-react-navigations": "^28.1.39",
     "@syncfusion/ej2-react-ribbon": "^28.1.33",
     "inventron": "file:",

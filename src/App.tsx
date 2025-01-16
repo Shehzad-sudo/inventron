@@ -190,89 +190,140 @@ registerLicense('ORg4AjUWIQA/Gnt2XVhhQlJHfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hTH5
 
 
 
-import WelcomeSplash from './pages/welcomeSpash.jsx';
-
 
 import { createRoot } from 'react-dom/client';
 import * as React from 'react';
-import { useEffect, useState, useRef } from 'react';
-import { RibbonComponent, RibbonTabsDirective, RibbonTabDirective, RibbonCollectionsDirective, RibbonCollectionDirective, RibbonGroupsDirective, RibbonGroupDirective, RibbonItemsDirective, RibbonItemDirective, RibbonColorPicker } from '@syncfusion/ej2-react-ribbon';
-import { RibbonFileMenu, RibbonGallery, RibbonItemSize, Inject } from '@syncfusion/ej2-react-ribbon';
+import { useState, useRef } from 'react';
+import {
+  RibbonComponent,
+  RibbonTabsDirective,
+  RibbonTabDirective,
+  RibbonCollectionsDirective,
+  RibbonCollectionDirective,
+  RibbonGroupsDirective,
+  RibbonGroupDirective,
+  RibbonItemsDirective,
+  RibbonItemDirective,
+  RibbonColorPicker
+} from '@syncfusion/ej2-react-ribbon';
+import {
+  RibbonFileMenu,
+  RibbonGallery,
+  RibbonItemSize,
+  Inject
+} from '@syncfusion/ej2-react-ribbon';
 
+import WelcomeSplash from './pages/welcomeSpash';
+import InventoryItems from './pages/InventoryItems';
 
+// Define an enum for page types to make switching more reliable
+enum PageType {
+  WELCOME = 'welcome',
+  INVENTORY = 'inventory',
+  NONE = 'none'
+}
 
 const App = () => {
-  let ribbonObj = useRef(null);
-  
-  const [contentPage, setContentPage] = useState(WelcomeSplash);
+  const ribbonObj = useRef(null);
+  // Use string-based state instead of component references
+  const [currentPage, setCurrentPage] = useState<PageType>(PageType.NONE);
 
-    const gallerySettings = ({
-        
-        popupWidth: '544px',
-        itemCount: 3,
-        
-    });
+  const fileOptions = [
+    { text: "New", iconCss: "e-icons e-file-new", id: "new" },
+    { text: "Open", iconCss: "e-icons e-folder-open", id: "Open" },
+    { text: "Rename", iconCss: "e-icons e-rename", id: "rename" },
+    {
+      text: "Save as", iconCss: "e-icons e-save", id: "save",
+      items: [
+        { text: "Microsoft Word (.docx)", iconCss: "sf-icon-word", id: "newword" },
+        { text: "Microsoft Word 97-2003(.doc)", iconCss: "sf-icon-word", id: "oldword" },
+        { text: "Download as PDF", iconCss: "e-icons e-export-pdf", id: "pdf" }
+      ]
+    }
+  ];
 
-    const fileOptions = [{ text: "New", iconCss: "e-icons e-file-new", id: "new" },
-        { text: "Open", iconCss: "e-icons e-folder-open", id: "Open" },
-        { text: "Rename", iconCss: "e-icons e-rename", id: "rename" },
-        {
-            text: "Save as", iconCss: "e-icons e-save", id: "save",
-            items: [
-                { text: "Microsoft Word (.docx)", iconCss: "sf-icon-word", id: "newword" },
-                { text: "Microsoft Word 97-2003(.doc)", iconCss: "sf-icon-word", id: "oldword" },
-                { text: "Download as PDF", iconCss: "e-icons e-export-pdf", id: "pdf" }
-            ]
-        }];
+  // Helper function to render the current page
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case PageType.WELCOME:
+        return <WelcomeSplash />;
+      case PageType.INVENTORY:
+        return <InventoryItems />;
+      default:
+        return null; // Or a default page component
+    }
+  };
 
+  return (
+    <div className='control-pane'>
+      <div className='control ribbon-sample'>
+        <div id="gallery-ribbonContainer" className='ribbon-gallery-container'>
+          <RibbonComponent
+            id='gallery-ribbon'
+            cssClass='ribbonGallery'
+            ref={ribbonObj}
+            fileMenu={{ visible: true, menuItems: fileOptions }}
+          >
+            <RibbonTabsDirective>
+              <RibbonTabDirective header='Inventory'>
+                <RibbonGroupsDirective>
+                  <RibbonGroupDirective
+                    header="Inventory Data"
+                    groupIconCss="e-icons e-zoom-to-fit"
+                    orientation="Row"
+                  >
+                    <RibbonCollectionsDirective>
+                      <RibbonCollectionDirective>
+                        <RibbonItemsDirective>
+                          <RibbonItemDirective
+                            type="Button"
+                            buttonSettings={{
+                              iconCss: "e-icons e-paste",
+                              content: "Inventory Items",
+                              clicked: () => setCurrentPage(PageType.WELCOME)
+                            }}
+                          />
+                          <RibbonItemDirective
+                            type="Button"
+                            buttonSettings={{
+                              iconCss: "e-icons e-calculate-sheet",
+                              content: "Stock Information",
+                              clicked: () => setCurrentPage(PageType.INVENTORY)
+                            }}
+                          />
+                        </RibbonItemsDirective>
+                      </RibbonCollectionDirective>
+                    </RibbonCollectionsDirective>
+                  </RibbonGroupDirective>
+                  <RibbonGroupDirective header="Show" isCollapsible={true}>
+                    <RibbonCollectionsDirective>
+                      <RibbonCollectionDirective>
+                        <RibbonItemsDirective>
+                          <RibbonItemDirective
+                            type="CheckBox"
+                            checkBoxSettings={{
+                              label: "Ruler",
+                              checked: false,
+                              change: () => { }
+                            }}
+                          />
+                        </RibbonItemsDirective>
+                      </RibbonCollectionDirective>
+                    </RibbonCollectionsDirective>
+                  </RibbonGroupDirective>
+                </RibbonGroupsDirective>
+              </RibbonTabDirective>
+            </RibbonTabsDirective>
+            <Inject services={[RibbonFileMenu, RibbonColorPicker, RibbonGallery]} />
+          </RibbonComponent>
 
-    return (<div className='control-pane'>
-                <div className='control ribbon-sample'>
-                    <div id="gallery-ribbonContainer" className='ribbon-gallery-container'>
-                        <RibbonComponent id='gallery-ribbon' cssClass='ribbonGallery' ref={ribbonObj} fileMenu={{ visible: true, menuItems: fileOptions }} >
-                            <RibbonTabsDirective>
-
-     
-                                <RibbonTabDirective header='Inventory'>
-                                    <RibbonGroupsDirective>
-
-                                        <RibbonGroupDirective header="Inventory Data" groupIconCss="e-icons e-zoom-to-fit" orientation="Row">
-                                            <RibbonCollectionsDirective>
-                                                <RibbonCollectionDirective>
-                                                    <RibbonItemsDirective>
-                                                        <RibbonItemDirective type="Button" buttonSettings={{ iconCss: "e-icons e-paste", content: "Inventory Items", clicked: () => { } }}>
-                                                        </RibbonItemDirective>
-                                                        <RibbonItemDirective type="Button" buttonSettings={{ iconCss: "e-icons e-calculate-sheet", content: "Stock Information", clicked: () => {  } }}>
-                                                        </RibbonItemDirective>
-                                                    </RibbonItemsDirective>
-                                                </RibbonCollectionDirective>
-                                            </RibbonCollectionsDirective>
-                                        </RibbonGroupDirective>
-                                        <RibbonGroupDirective header="Show" isCollapsible={true}>
-                                            <RibbonCollectionsDirective>
-                                                <RibbonCollectionDirective>
-                                                    <RibbonItemsDirective>
-                                                        <RibbonItemDirective type="CheckBox" checkBoxSettings={{ label: "Ruler", checked: false, change: () => {  } }}>
-                                                
-                                                        </RibbonItemDirective>
-                                                    </RibbonItemsDirective>
-                                                </RibbonCollectionDirective>
-                                            </RibbonCollectionsDirective>
-                                        </RibbonGroupDirective>
-                                    </RibbonGroupsDirective>
-                                </RibbonTabDirective>
-                            </RibbonTabsDirective>
-                            <Inject services={[RibbonFileMenu, RibbonColorPicker, RibbonGallery]}/>
-                        </RibbonComponent>
-
-
-                        <div id="window-page" className="window-page">
-                          {contentPage};
-                        </div>
-
-                    </div>
-                </div>
-        </div>);
+          <div id="window-page" className="window-page">
+            {renderCurrentPage()}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
-export default App;
 
+export default App;
