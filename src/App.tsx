@@ -215,11 +215,13 @@ import {
 
 import WelcomeSplash from './pages/welcomeSpash';
 import InventoryItems from './pages/InventoryItems';
+import Sales from './pages/Sales.jsx'
 
 // Define an enum for page types to make switching more reliable
 enum PageType {
   WELCOME = 'welcome',
   INVENTORY = 'inventory',
+  Sales = 'sales',
   NONE = 'none'
 }
 
@@ -249,6 +251,8 @@ const App = () => {
         return <WelcomeSplash />;
       case PageType.INVENTORY:
         return <InventoryItems />;
+      case PageType.Sales:
+        return <Sales />
       default:
         return null; // Or a default page component
     }
@@ -265,6 +269,8 @@ const App = () => {
             fileMenu={{ visible: true, menuItems: fileOptions }}
           >
             <RibbonTabsDirective>
+
+
               <RibbonTabDirective header='Inventory'>
                 <RibbonGroupsDirective>
                   <RibbonGroupDirective
@@ -313,6 +319,60 @@ const App = () => {
                   </RibbonGroupDirective>
                 </RibbonGroupsDirective>
               </RibbonTabDirective>
+
+
+
+              <RibbonTabDirective header='Transactions'>
+                <RibbonGroupsDirective>
+                  <RibbonGroupDirective
+                    header="Transactions"
+                    groupIconCss="e-icons e-zoom-to-fit"
+                    orientation="Row"
+                  >
+                    <RibbonCollectionsDirective>
+                      <RibbonCollectionDirective>
+                        <RibbonItemsDirective>
+                          <RibbonItemDirective
+                            type="Button"
+                            buttonSettings={{
+                              iconCss: "e-icons e-arrow-up",
+                              content: "  Sales  ",
+                              clicked: () => setCurrentPage(PageType.Sales)
+                            }}
+                          />
+                          <RibbonItemDirective
+                            type="Button"
+                            buttonSettings={{
+                              iconCss: "e-icons e-arrow-down",
+                              content: "Purchases",
+                              clicked: () => setCurrentPage(PageType.INVENTORY)
+                            }}
+                          />
+                        </RibbonItemsDirective>
+                      </RibbonCollectionDirective>
+                    </RibbonCollectionsDirective>
+                  </RibbonGroupDirective>
+                  <RibbonGroupDirective header="Show" isCollapsible={true}>
+                    <RibbonCollectionsDirective>
+                      <RibbonCollectionDirective>
+                        <RibbonItemsDirective>
+                          <RibbonItemDirective
+                            type="CheckBox"
+                            checkBoxSettings={{
+                              label: "Ruler",
+                              checked: false,
+                              change: () => { }
+                            }}
+                          />
+                        </RibbonItemsDirective>
+                      </RibbonCollectionDirective>
+                    </RibbonCollectionsDirective>
+                  </RibbonGroupDirective>
+                </RibbonGroupsDirective>
+              </RibbonTabDirective>
+
+
+
             </RibbonTabsDirective>
             <Inject services={[RibbonFileMenu, RibbonColorPicker, RibbonGallery]} />
           </RibbonComponent>

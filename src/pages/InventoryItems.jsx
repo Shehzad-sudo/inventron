@@ -910,7 +910,7 @@ const InventoryPage = () => {
   };
   //inventory add item above
 
-
+  
   const handleListSelect = (args) => {
     const itemName = args.text || args.target.innerText;
     if (itemDetails[itemName]) {
